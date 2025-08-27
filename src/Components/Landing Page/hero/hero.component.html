@@ -1,0 +1,21 @@
+<div class="mx-auto px-4 w-full h-full flex justify-center items-center relative">
+    <div class="flex justify-center items-center flex-col gap-3.5 max-w-[710px] text-center text-dark">
+        <p class="ml-1 text-4xl font-semibold">
+            <span class="text-primary">
+                <span class="block">رحال</span>
+                شركتك الموثوقة</span>
+            <span>للشحن والنقل في الوطن العربي</span>
+        </p>
+        <p>حلول شحن سريعة وآمنة للأفراد والشركات، برًا وبحرًا وجوًا، مع التزام بالوقت والجودة.</p>
+        <button aria-label="Inquiry"
+            class="hidden md:block border-3 rounded-full border-primary w-[155px] p-2 text-dark hover:bg-primary hover:text-second duration-300 ease-in-out transition-colors flex-shrink-0">
+            حجز
+        </button>
+    </div>
+    <div class="mx-auto px-4 absolute top-0 left-0 w-full h-full pointer-events-none ">
+        <div class="absolute w-28 md:w-48 bottom-30 boxes"><img [src]="assets.boxes" /></div>
+        <div class="absolute w-28 md:w-48 bottom-30 van "><img [src]="assets.van" /></div>
+        <div class="absolute w-18 plane "><img [src]="assets.plane" /></div>
+        <div class="absolute w-38 md:w-70 ship top-20 "><img [src]="assets.ship" /></div>
+    </div>
+</div>

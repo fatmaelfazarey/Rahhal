@@ -1,0 +1,279 @@
+.boxes {
+    animation: boxes_move_right 2s forwards;
+}
+
+@keyframes boxes_move_right {
+    from {
+        left: -100%;
+    }
+
+    to {
+        left: 120px;
+    }
+}
+
+@keyframes boxes_move_right_1280 {
+    from {
+        left: -100%;
+    }
+
+    to {
+        left: 120px;
+    }
+}
+
+@keyframes boxes_move_right_1024 {
+    from {
+        left: -100%;
+    }
+
+    to {
+        left: 50px;
+    }
+}
+
+@media (max-Width:1280px) {
+    .boxes {
+        animation:
+            boxes_move_right_1280 2s forwards;
+    }
+}
+
+@media (max-Width:1024px) {
+    .boxes {
+        animation:
+            boxes_move_right_1024 2s forwards;
+    }
+}
+
+/* Van Animation */
+.van {
+    animation:
+        van_move_left 4s forwards,
+        van_move_upDown 2s 4s infinite;
+}
+
+@media (max-Width:1280px) {
+    .van {
+        animation:
+            van_move_left_1280 4s forwards,
+            van_move_upDown 2s 4s infinite;
+    }
+}
+
+@media (max-Width:1024px) {
+    .van {
+        animation:
+            van_move_left_1024 4s forwards,
+            van_move_upDown 2s 4s infinite;
+    }
+}
+
+@keyframes van_move_left {
+    from {
+        right: -100%;
+    }
+
+    to {
+        right: 250px;
+    }
+}
+
+@keyframes van_move_left_1280 {
+    from {
+        right: -100%;
+    }
+
+    to {
+        right: 150px;
+    }
+}
+
+@keyframes van_move_left_1024 {
+    from {
+        right: -100%;
+    }
+
+    to {
+        right: 50px;
+    }
+}
+
+@keyframes van_move_upDown {
+    0% {
+        bottom: 120px;
+    }
+
+    50% {
+        bottom: 125px;
+    }
+
+    100% {
+        bottom: 120px;
+    }
+}
+
+/* Plane Animation */
+.plane {
+    offset-path: path("M0,900 C300,600 100,200 1200,200 ");
+    animation: move 4000ms forwards ease-in-out;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    transform-origin: center;
+    will-change: transform;
+}
+
+@keyframes move {
+    0% {
+        offset-distance: 0%;
+        transform: scale(0.5, 0.5) rotate(90deg);
+    }
+
+    30% {
+        transform: scale(1.2, 1.2) rotate(120deg);
+    }
+
+    80% {
+        transform: scale(1.5, 1.5) rotate(120deg);
+    }
+
+    100% {
+        offset-distance: 100%;
+        transform: scale(1.7, 1.7) rotate(90deg);
+    }
+}
+@media (max-Width:1024px) {
+    .plane {
+        offset-path: path("M0,800 C300,600 100,200 800,150 ");
+        animation: move 4000ms forwards ease-in-out;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        transform-origin: center;
+        will-change: transform;
+    }
+}
+@media (max-Width:768px) {
+    .plane {
+        offset-path: path("M0,800 C300,600 100,200 600,150 ");
+        animation: move 4000ms forwards ease-in-out;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        transform-origin: center;
+        will-change: transform;
+    }
+}
+@media (max-Width:640px) {
+    .plane {
+        offset-path: path("M0,500 C300,600 100,200 500,150 ");
+        animation: move 4000ms forwards ease-in-out;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        transform-origin: center;
+        will-change: transform;
+    }
+}
+@media (max-Width:375px) {
+    .plane {
+        offset-path: path("M0,500 C300,600 100,200 280,150 ");
+        animation: move 4000ms forwards ease-in-out;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        transform-origin: center;
+        will-change: transform;
+    }
+}
+
+/* Ship Animation */
+.ship {
+    animation:
+        wave_move_ship 15s forwards,
+        ship_move_upDown 2s infinite;
+    ;
+}
+
+@keyframes wave_move_ship {
+    0% {
+        left: -200px;
+    }
+
+    100% {
+        left: 120px;
+    }
+
+}
+
+@keyframes ship_move_upDown {
+    0% {
+        top: 80px;
+    }
+
+    50% {
+        top: 85px;
+    }
+
+    100% {
+        top: 80px;
+    }
+}
+
+@keyframes ship_move_upDown_768 {
+    0% {
+        top: 120px;
+    }
+
+    50% {
+        top: 125px;
+    }
+
+    100% {
+        top: 120px;
+    }
+}
+
+@keyframes wave_move_ship_1280 {
+    from {
+        left: -100%;
+    }
+
+    to {
+        left: 70px;
+    }
+}
+
+@keyframes wave_move_ship_1024 {
+    from {
+        left: -100%;
+    }
+
+    to {
+        left: 30px;
+    }
+}
+
+@media (max-Width:1280px) {
+    .ship {
+        animation:
+            wave_move_ship_1280 2s forwards, ship_move_upDown 2s infinite;
+    }
+}
+
+@media (max-Width:1024px) {
+    .ship {
+        animation:
+            wave_move_ship_1024 2s forwards,
+            ship_move_upDown 2s infinite;
+    }
+}
+
+@media (max-Width:768px) {
+    .ship {
+        animation:
+            wave_move_ship_1024 2s forwards,
+            ship_move_upDown_768 2s infinite;
+    }
+}

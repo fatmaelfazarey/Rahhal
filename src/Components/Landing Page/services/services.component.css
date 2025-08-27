@@ -1,0 +1,30 @@
+
+.group:hover {
+    border-bottom-color: var(--color-primary);
+    transform: translateY(-4px);
+}
+
+.group:hover .group-hover\:animate-arrow_bounce {
+    animation: arrow_right 0.8s ease-in-out infinite;
+}
+
+.group:hover .group-hover\:image_scale {
+    scale: 120%;
+}
+
+@keyframes arrow_right {
+
+    0% {
+        transform: translateX(10px);
+    }
+
+    90% {
+        transform: translateX(-10px);
+    }
+
+    100% {
+        transform: translateX(10px);
+    }
+
+
+}

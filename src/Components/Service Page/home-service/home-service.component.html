@@ -1,0 +1,91 @@
+<div class=" h-[100vh] flex flex-col relative overflow-hidden ">
+    <div class="max-w-screen-xl mx-auto px-4 w-full h-fit flex flex-col md:flex-row justify-between items-center mt-3 gap-4 md:gap-0 "
+        dir="rtl">
+        <a class="w-[155px] flex-shrink-0" aria-label="Go to homepage">
+            <img [src]="assets.logo" alt="Website logo" class="w-full h-auto" width="155" height="auto">
+        </a>
+
+        <button aria-label="Inquiry" routerLink="/orders"
+            class="hidden md:block border-3 rounded-full border-primary w-[155px] p-2 bg-second text-dark hover:bg-primary hover:text-second duration-300 ease-in-out transition-colors flex-shrink-0">
+            استعلام
+        </button>
+    </div>
+    <div class="service-container" dir="rtl">
+        <div class="relative w-full h-[600px] rounded-2xl overflow-hidden shadow-2xl">
+            <!-- الخلفية المتغيرة -->
+            <div class="absolute inset-0 bg-cover bg-center bg-image-transition"
+                [style.background-image]="'url(' + currentImage + ')'">
+                <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+            </div>
+
+            <!-- محتوى الخدمة -->
+            <div class="relative z-10 h-full flex flex-col justify-center items-center p-8">
+                <div class="service-card rounded-2xl p-8 w-full max-w-2xl shadow-xl">
+                    <h1 class="text-3xl md:text-4xl font-bold text-dark text-center mb-4">{{ serviceData.name }}</h1>
+                    <p class="text-lg text-center text-gray-700 mb-6">{{ serviceData.marketingSentence }}</p>
+
+                    <div class="flex flex-wrap justify-center gap-4 mb-6">
+                        <div class="bg-primary text-white px-4 py-2 rounded-full">
+                            <span class="font-medium">السعر: </span>
+                            <span>{{ serviceData.price }} ريال</span>
+                        </div>
+                        <div class="bg-secondary text-white px-4 py-2 rounded-full">
+                            <span class="font-medium">المدة: </span>
+                            <span>{{ serviceData.time }} دقيقة</span>
+                        </div>
+                        <div class="bg-accent text-white px-4 py-2 rounded-full">
+                            <span class="font-medium">الطلبات: </span>
+                            <span>{{ serviceData.orders }}</span>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-600 text-center mb-6 leading-relaxed">{{ serviceData.description }}</p>
+
+                    <div class="mb-6">
+                        <h2 class="text-xl font-semibold text-dark mb-3 text-center">مميزات الخدمة</h2>
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            <li *ngFor="let feature of serviceData.serviceFeatures" class="flex items-start">
+                                <span class="text-green-500 mt-1 ml-2"><i class="fas fa-check-circle"></i></span>
+                                <span class="text-gray-700">{{ feature }}</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="text-center">
+                        <button
+                            class="bg-primary hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300">
+                            اطلب الخدمة الآن
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- عناصر التحكم في الصور -->
+            <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2">
+                <button *ngFor="let image of serviceData.images; let i = index" (click)="setCurrentImage(i)"
+                    class="w-3 h-3 rounded-full transition-all duration-300"
+                    [class]="currentIndex === i ? 'bg-white w-8' : 'bg-white bg-opacity-50'">
+                </button>
+            </div>
+
+            <!-- أزرار التنقل -->
+            <button (click)="prevImage()"
+                class="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-white bg-opacity-80 hover:bg-opacity-100 text-dark w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button (click)="nextImage()"
+                class="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-white bg-opacity-80 hover:bg-opacity-100 text-dark w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+    <!-- <div *ngIf="serviceData">
+        <h2>{{ serviceData.title }}</h2>
+        <p>{{ serviceData.description }}</p>
+        <p>Price: {{ serviceData.price | currency }}</p>
+    </div>
+
+    <div *ngIf="!serviceData">
+        Loading service data...
+    </div> -->
+</div>

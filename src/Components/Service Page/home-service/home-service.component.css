@@ -1,0 +1,82 @@
+.bg_image {
+    background-image: url('../../../assets/Services Image/Service-img-01.jpg');
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    filter: brightness(0.5);
+    z-index: -2;
+
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+
+* {
+    font-family: 'Tajawal', sans-serif;
+}
+
+.service-container {
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.bg-image-transition {
+    transition: background-image 1s ease-in-out;
+}
+
+.service-card {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.85);
+}
+
+/* تخصيص ألوان Tailwind */
+:root {
+    --color-primary: #3b82f6;
+    --color-secondary: #10b981;
+    --color-accent: #f59e0b;
+    --color-dark: #1f2937;
+    --color-light: #f8fafc;
+}
+
+.bg-primary {
+    background-color: var(--color-primary);
+}
+
+.bg-secondary {
+    background-color: var(--color-secondary);
+}
+
+.bg-accent {
+    background-color: var(--color-accent);
+}
+
+.text-dark {
+    color: var(--color-dark);
+}
+
+.text-light {
+    color: var(--color-light);
+}
+
+/* التجاوب مع الشاشات الصغيرة */
+@media (max-width: 768px) {
+    .service-card {
+        backdrop-filter: blur(5px);
+        background: rgba(255, 255, 255, 0.92);
+        padding: 1.5rem;
+    }
+
+    .service-container {
+        min-height: 500px;
+    }
+
+    .service-container>div {
+        height: 500px;
+    }
+}

@@ -1,0 +1,66 @@
+<div class="max-w-screen-xl mx-auto px-4 w-full h-fit flex flex-col md:flex-row justify-between items-center mt-3 gap-4 md:gap-0"
+    dir="rtl">
+    <!-- Logo & Mobile Menu Button -->
+    <div class="flex items-center justify-between w-full md:w-auto">
+        <a [routerLink]="'/'" class="w-[155px] flex-shrink-0" aria-label="Go to homepage">
+            <img [src]="assets.logo" alt="Website logo" class="w-full h-auto" width="155" height="auto">
+        </a>
+
+        <!-- Mobile Buttons Container -->
+        <div class="flex items-center gap-2 md:hidden">
+            <!-- Mobile Menu Button -->
+            <button (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen" aria-label="Toggle navigation menu"
+                class="p-2 text-dark">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path *ngIf="!isMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16" />
+                    <path *ngIf="isMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <!-- Inquiry Button - Mobile -->
+            <button aria-label="Inquiry" routerLink="/orders"
+                class="border-3 rounded-full border-primary w-[100px] p-2 bg-second text-dark hover:bg-primary hover:text-second duration-300 ease-in-out transition-colors text-sm">
+                استعلام
+            </button>
+        </div>
+    </div>
+
+    <!-- Navigation - Desktop -->
+    <nav class="hidden md:block" aria-label="Main navigation">
+        <ul class="flex flex-col md:flex-row items-center w-full justify-center">
+            <li *ngFor="let item of NavBar"
+                class="p-2 px-6 text-dark hover:text-primary hover:border-b-3 border-primary duration-300 ease-in-out transition-all text-center w-full md:w-auto hover:bg-second rounded-lg">
+                <a (click)="navigateToSection(item.navigateTo, item.fragment)" class="block cursor-pointer"
+                    [attr.aria-current]="isActive(item.navigateTo) ? 'page' : null">
+                    {{ item.text }}
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Navigation - Mobile -->
+    <div class="fixed top-[61px] right-0 z-50 px-4 w-full h-full bg-white" *ngIf="isMenuOpen"
+        (click)="handleBackdropClick($event)">
+        <nav class="h-full w-full bg-white transform transition-transform duration-300 ease-in-out md:hidden" dir="rtl"
+            aria-label="Mobile navigation">
+            <ul class="p-4">
+                <li *ngFor="let item of NavBar" class="mb-4">
+                    <a (click)="navigateToSection(item.navigateTo, item.fragment)"
+                        class="block p-3 text-dark hover:bg-second rounded-lg hover:border-b-3 border-primary cursor-pointer"
+                        [attr.aria-current]="isActive(item.navigateTo) ? 'page' : null">
+                        {{ item.text }}
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Button - Desktop -->
+    <button aria-label="Inquiry" routerLink="/orders"
+        class="hidden md:block border-3 rounded-full border-primary w-[155px] p-2 bg-second text-dark hover:bg-primary hover:text-second duration-300 ease-in-out transition-colors flex-shrink-0">
+        استعلام
+    </button>
+</div>
+<router-outlet />
