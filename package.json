@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:Rahhal": "node dist/rahhal/server/server.mjs"
+    "serve:ssr:Rahhal": "node dist/rahhal/server/server.mjs",
+    "vercel-build": "npm install --legacy-peer-deps && ng build --configuration production"
   },
   "private": true,
   "dependencies": {
