@@ -1,31 +1,6 @@
-// import { Component, Input, OnInit } from '@angular/core';
-// import { assets, ServicesImage } from '../../../assets/assets';
-// import { CommonModule } from '@angular/common';
-
-// @Component({
-//   selector: 'app-home-service',
-//   standalone: true,
-//   imports: [CommonModule],
-//   templateUrl: './home-service.component.html',
-//   styleUrl: './home-service.component.css'
-// })
-// export class HomeServiceComponent implements OnInit {
-//   assets = assets;
-//   ServicesImage = ServicesImage;
-//   @Input() serviceData: any;
-
-//   constructor() {
-//     // Still undefined here
-//   }
-
-//   ngOnInit() {
-//     console.log("serviceData", this.serviceData); // Now available
-//   }
-// }
-
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, NgZone, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ServicesImage, assets } from '../../../assets/assets';
+import { ServicesImage, ServicesVideo, assets } from '../../../assets/assets';
 
 @Component({
   selector: 'app-home-service',
@@ -34,54 +9,160 @@ import { ServicesImage, assets } from '../../../assets/assets';
   templateUrl: './home-service.component.html',
   styleUrls: ['./home-service.component.css']
 })
-export class HomeServiceComponent implements OnInit, OnDestroy {
+export class HomeServiceComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() serviceData: any;
+  @ViewChild('backgroundVideo') videoElement!: ElementRef<HTMLVideoElement>;
+  
   assets = assets;
   ServicesImage = ServicesImage;
+  ServicesVideo = ServicesVideo;
+  
+  currentMediaUrl: string = '';
   currentIndex: number = 0;
+  isVideo: boolean = false;
   private intervalId: any;
+  private mediaArray: any[] = [];
+  private usedIndices: Set<number> = new Set();
+
+  constructor(private ngZone: NgZone) {}
 
   ngOnInit() {
-    this.startImageRotation();
+    this.prepareMediaArray();
+    
+    if (this.mediaArray.length > 0) {
+      this.setRandomMedia();
+      this.startMediaRotation();
+    }
+  }
+
+  ngAfterViewInit() {
+    this.setupVideoAutoplay();
   }
 
   ngOnDestroy() {
-    this.stopImageRotation();
+    this.stopMediaRotation();
   }
 
-  startImageRotation() {
-    this.intervalId = setInterval(() => {
-      this.nextImage();
-    }, 5000); // تغيير الصورة كل 5 ثوانٍ
+  // تجهيز مصفوفة الوسائط من الصور والفيديوهات
+  prepareMediaArray() {
+    this.mediaArray = [];
+    
+    // إضافة الصور أولاً
+    if (this.serviceData?.images?.length > 0) {
+      this.serviceData.images.forEach((image: string) => {
+        this.mediaArray.push({ type: 'image', url: image });
+      });
+    }
+    
+    // إضافة الفيديوهات
+    if (this.serviceData?.videos?.length > 0) {
+      this.serviceData.videos.forEach((video: string) => {
+        this.mediaArray.push({ type: 'video', url: video });
+      });
+    }
   }
 
-  stopImageRotation() {
+  // تهيئة التشغيل التلقائي للفيديو
+  setupVideoAutoplay() {
+    if (this.videoElement && this.isVideo) {
+      const video = this.videoElement.nativeElement;
+      video.muted = true; // كتم الصوت
+      video.loop = true; // تكرار الفيديو
+      
+      // محاولة تشغيل الفيديو تلقائياً
+      const playPromise = video.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.log('تشغيل الفيديو التلقائي فشل، سيتم إعادة المحاولة:', error);
+          // إعادة المحاولة بعد فترة
+          setTimeout(() => {
+            video.play().catch(e => console.log('لا يزال غير ممكن تشغيل الفيديو:', e));
+          }, 1000);
+        });
+      }
+    }
+  }
+
+  startMediaRotation() {
+    this.ngZone.runOutsideAngular(() => {
+      this.intervalId = setInterval(() => {
+        this.ngZone.run(() => {
+          this.setRandomMedia();
+        });
+      }, 5000); // تغيير الوسائط كل 5 ثواني
+    });
+  }
+
+  stopMediaRotation() {
     if (this.intervalId) {
       clearInterval(this.intervalId);
       this.intervalId = null;
     }
   }
 
-  nextImage() {
-    if (this.serviceData && this.serviceData.images) {
-      this.currentIndex = (this.currentIndex + 1) % this.serviceData.images.length;
+  // اختيار وسائط عشوائية مع ضمان عدم التكرار حتى تنتهي جميع الوسائط
+  setRandomMedia() {
+    if (this.mediaArray.length === 0) return;
+    
+    // إذا تم عرض جميع الوسائط، ابدأ مجموعة جديدة
+    if (this.usedIndices.size >= this.mediaArray.length) {
+      this.usedIndices.clear();
+    }
+    
+    let randomIndex;
+    do {
+      randomIndex = Math.floor(Math.random() * this.mediaArray.length);
+    } while (this.usedIndices.has(randomIndex));
+    
+    this.usedIndices.add(randomIndex);
+    this.currentIndex = randomIndex;
+    
+    const media = this.mediaArray[this.currentIndex];
+    this.currentMediaUrl = media.url;
+    this.isVideo = media.type === 'video';
+    
+    // إذا كان الفيديو، ننتظر حتى يتم تحميل العنصر في العرض
+    if (this.isVideo) {
+      setTimeout(() => {
+        this.setupVideoAutoplay();
+      }, 100);
     }
   }
 
-  prevImage() {
-    if (this.serviceData && this.serviceData.images) {
-      this.currentIndex = (this.currentIndex - 1 + this.serviceData.images.length) % this.serviceData.images.length;
+  // للتحكم اليدوي (إذا كنت تريدين إضافة أزرار للتحكم)
+  nextMedia() {
+    this.setRandomMedia();
+    this.restartRotation();
+  }
+
+  prevMedia() {
+    this.setRandomMedia();
+    this.restartRotation();
+  }
+
+  setSpecificMedia(index: number) {
+    if (this.mediaArray.length > 0 && index >= 0 && index < this.mediaArray.length) {
+      this.currentIndex = index;
+      const media = this.mediaArray[this.currentIndex];
+      this.currentMediaUrl = media.url;
+      this.isVideo = media.type === 'video';
+      
+      this.usedIndices.add(index);
+      
+      // إذا كان الفيديو، ننتظر حتى يتم تحميل العنصر في العرض
+      if (this.isVideo) {
+        setTimeout(() => {
+          this.setupVideoAutoplay();
+        }, 100);
+      }
+      
+      this.restartRotation();
     }
   }
 
-  setCurrentImage(index: number) {
-    this.currentIndex = index;
-    // إعادة تشغيل التدوير التلقائي بعد النقر على مؤشر الصورة
-    this.stopImageRotation();
-    this.startImageRotation();
-  }
-
-  get currentImage(): string {
-    return this.serviceData?.images[this.currentIndex] || '';
+  private restartRotation() {
+    this.stopMediaRotation();
+    this.startMediaRotation();
   }
 }

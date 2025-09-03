@@ -1,39 +1,12 @@
-// import { Component, OnInit } from '@angular/core';
-// import { ActivatedRoute } from '@angular/router';
-// import { CommonModule } from '@angular/common';
-// import { ServicesImage, ServicesVideo } from '../../assets/assets';
-// import { HomeServiceComponent } from "../../Components/Service Page/home-service/home-service.component";
-// import { FeaturesSectionComponent } from "../../Components/Service Page/features-section/features-section.component";
+// import { ServiceContent } from './../../Models/models/service.model';
+// import { Injectable } from '@angular/core';
+// import { ServicesImage, ServicesVideo } from '../path/to/your/enums'; // Update path
 
-// // Define interface for better type safety
-// interface ServiceData {
-//   name: string;
-//   marketingSentence: string;
-//   price: string;
-//   time: string;
-//   orders: string;
-//   CustomerSatisfaction: string;
-//   description: string;
-//   serviceFeatures: string[];
-//   images: string[];
-// }
-
-// type ServiceType = keyof typeof ServiceComponent.prototype.servicePageContent;
-
-// @Component({
-//   selector: 'app-service',
-//   standalone: true,
-//   imports: [CommonModule, HomeServiceComponent, FeaturesSectionComponent],
-//   templateUrl: './service.component.html',
-//   styleUrl: './service.component.css'
+// @Injectable({
+//   providedIn: 'root'
 // })
-// export class ServiceComponent implements OnInit {
-//   ServicesImage = ServicesImage;
-//   serviceId: ServiceType = 'dismantle';
-//   currentService: ServiceData | undefined;
-
-//   //#region servicePageContent
-//   servicePageContent = {
+// export class ServicesPageContentService {
+//   private servicePageContent: ServicePageContent = {
 //     dismantle: {
 //       name: "خدمة تفكيك الأساس",
 //       marketingSentence: 'فك أثاثك بسهولة وسرعة مع الحفاظ على سلامته',
@@ -139,99 +112,31 @@
 //         'أسعار اقتصادية للجميع.',
 //         'فريق مدرَّب على أساليب التنظيف الحديثة.'
 //       ],
-//       images: [],
-//       // images: [ServicesImage.Service_img_06, ServicesImage.Service_img_10, ServicesImage.Service_img_28, ServicesImage.Service_img_33, ServicesImage.Service_img_40],
+//       images: [ServicesImage.Service_img_06, ServicesImage.Service_img_10, ServicesImage.Service_img_28, ServicesImage.Service_img_33, ServicesImage.Service_img_40],
 //       videos: [ServicesVideo.Video_11, ServicesVideo.Video_12]
 //     }
 //   };
-//   //#endregion
 
-//   constructor(private route: ActivatedRoute) { }
+//   constructor() { }
 
-//   ngOnInit() {
-//     this.initializeServiceData();
+//   // Get all services
+//   getAllServices(): ServicePageContent {
+//     return this.servicePageContent;
 //   }
 
-//   private initializeServiceData() {
-//     this.route.paramMap.subscribe(params => {
-//       const serviceId = params.get('serviceId') as ServiceType;
-//       this.serviceId = this.isValidServiceId(serviceId) ? serviceId : 'dismantle';
-//       this.currentService = this.servicePageContent[this.serviceId];
-
-//       this.logServiceInfo();
-//     });
+//   // Get specific service by key
+//   getService(serviceKey: keyof ServicePageContent): ServiceContent {
+//     return this.servicePageContent[serviceKey];
 //   }
 
-//   private isValidServiceId(id: string | null): id is ServiceType {
-//     return id !== null && id in this.servicePageContent;
+//   // Get service by name (alternative method)
+//   getServiceByName(serviceName: string): ServiceContent | null {
+//     const services = Object.values(this.servicePageContent);
+//     return services.find(service => service.name === serviceName) || null;
 //   }
 
-//   private logServiceInfo() {
-//     console.log('Service ID:', this.serviceId);
-//     if (this.currentService) {
-//       console.log('Service Name:', this.currentService.name);
-//     }
+//   // Get all service keys
+//   getServiceKeys(): string[] {
+//     return Object.keys(this.servicePageContent);
 //   }
 // }
-
-
-
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { ServicesImage } from '../../assets/assets';
-import { HomeServiceComponent } from "../../Components/Service Page/home-service/home-service.component";
-import { FeaturesSectionComponent } from "../../Components/Service Page/features-section/features-section.component";
-import { ServicesContentService } from '../../Services/services-content.service';
-
-@Component({
-  selector: 'app-service',
-  standalone: true,
-  imports: [CommonModule, HomeServiceComponent, FeaturesSectionComponent],
-  templateUrl: './service.component.html',
-  styleUrl: './service.component.css'
-})
-export class ServiceComponent implements OnInit {
-  ServicesImage = ServicesImage;
-  serviceId: string = 'dismantle'; // تغيير النوع إلى string
-  currentService: any; // استخدام any لتجنب مشاكل التوافق
-
-  // احذف كتلة servicePageContent بالكامل من هنا
-
-  constructor(
-    private route: ActivatedRoute,
-    private servicesContentService: ServicesContentService // إضافة الـService
-  ) { }
-
-  ngOnInit() {
-    this.initializeServiceData();
-  }
-
-  private initializeServiceData() {
-    this.route.paramMap.subscribe(params => {
-      const serviceId = params.get('serviceId');
-      if (serviceId && this.isValidServiceId(serviceId)) {
-        this.serviceId = serviceId;
-        this.currentService = (this.servicesContentService.getAllServices() as any)[this.serviceId];
-        this.logServiceInfo();
-      } else {
-        // القيمة الافتراضية إذا لم يكن serviceId صحيحًا
-        this.serviceId = 'dismantle';
-        this.currentService = (this.servicesContentService.getAllServices() as any)[this.serviceId];
-      }
-    });
-  }
-
-  private isValidServiceId(id: string): boolean {
-    // الحصول على جميع الخدمات من الـService والتحقق من وجود المفتاح
-    const allServices = this.servicesContentService.getAllServices();
-    return id in allServices;
-  }
-
-  private logServiceInfo() {
-    console.log('Service ID:', this.serviceId);
-    if (this.currentService) {
-      console.log('Service Name:', this.currentService.name);
-    }
-  }
-}

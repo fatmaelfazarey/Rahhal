@@ -1,2 +1,17 @@
 <!-- <p>service works!</p> -->
-<app-home-service [serviceData]="servicePageContent.dismantle"></app-home-service>
+<div class="bg-second">
+    <app-home-service [serviceData]="currentService"></app-home-service>
+
+    @if (currentService) {
+    <app-features-section [featuresData]="currentService.serviceFeatures"></app-features-section>
+    } @else {
+    <div class="loading-indicator">
+        <div class="loading-spinner"></div>
+        جاري تحميل البيانات...
+    </div>
+    }
+    
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus porro dolorum sit, veritatis exercitationem
+        aperiam, a nostrum maxime aliquid ipsum neque dolor, quae reprehenderit eos nobis similique accusamus magnam
+        delectus!</p>
+</div>
