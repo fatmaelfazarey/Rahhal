@@ -1,0 +1,190 @@
+<div class="max-w-7xl mx-auto px-4 py-10 w-full" dir="rtl">
+
+        <!-- Header -->
+        <div class=" py-4 px-6">
+            <h1 class="text-2xl font-bold text-primary text-center">نموذج طلب النقل</h1>
+        </div>
+
+        <!-- Form -->
+        <form [formGroup]="orderForm" (ngSubmit)="onSubmit()" >
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- الاسم الكامل -->
+                <div class="space-y-2" data-aos="fade-left">
+                    <label class="block text-gray-700 font-medium">الاسم الكامل *</label>
+                    <input type="text" formControlName="fullName"
+                        class="w-full px-4 py-3 border border-second-opacity-0 bg-second rounded-lg outline-0 focus:border-primary"
+                        placeholder="أدخل اسمك الكامل">
+                    <div *ngIf="orderForm.get('fullName')?.invalid && orderForm.get('fullName')?.touched"
+                        class="text-red-500 text-sm">
+                        يرجى إدخال الاسم الكامل
+                    </div>
+                </div>
+
+                <!-- رقم الهاتف -->
+                <div class="space-y-2" data-aos="fade-right">
+                    <label class="block text-gray-700 font-medium">رقم الهاتف *</label>
+                    <input type="tel" formControlName="phone"
+                        class="w-full px-4 py-3 border border-second-opacity-0 bg-second rounded-lg outline-0 focus:border-primary">
+                    <div *ngIf="orderForm.get('phone')?.invalid && orderForm.get('phone')?.touched"
+                        class="text-red-500 text-sm">
+                        يرجى إدخال رقم هاتف صحيح
+                    </div>
+                </div>
+
+                <!-- اختيار الباقة -->
+                <div class="space-y-2" data-aos="fade-left">
+                    <label class="block text-gray-700 font-medium">اختيار الباقة *</label>
+                    <div class="space-y-2border border-second-opacity-0 bg-second rounded-lg p-4">
+                        <div *ngFor="let pkg of packages" class="flex items-center">
+                            <input type="checkbox" [id]="'pkg-'+pkg.id" [value]="pkg.id"
+                                (change)="onPackageChange($event)" class="ml-2 h-5 w-5  bg-primary">
+                            <label [for]="'pkg-'+pkg.id" class="text-gray-700">{{ pkg.name }} — {{ pkg.price }}
+                                ريال</label>
+                        </div>
+                    </div>
+                    <div *ngIf="orderForm.get('selectedPackages')?.invalid && orderForm.get('selectedPackages')?.touched"
+                        class="text-red-500 text-sm">
+                        يرجى اختيار باقة واحدة على الأقل
+                    </div>
+                </div>
+
+                <!-- اختيار الخدمات -->
+                <div class="space-y-2" data-aos="fade-right">
+                    <label class="block text-gray-700 font-medium">اختيار الخدمات</label>
+                    <div class="space-y-2border border-second-opacity-0 bg-second rounded-lg p-4">
+                        <div *ngFor="let service of services" class="flex items-center">
+                            <input type="checkbox" [id]="'service-'+service.id" [value]="service.id"
+                                (change)="onServiceChange($event)" class="ml-2 h-5 w-5 text-prbg-primary ">
+                            <label [for]="'service-'+service.id" class="text-gray-700">{{ service.name }} — {{
+                                service.price }} ريال</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- العنوان من -->
+                <div class="space-y-2" data-aos="fade-left">
+                    <label class="block text-gray-700 font-medium">العنوان من *</label>
+                    <div class="relative">
+                        <input type="text" formControlName="fromAddress"
+                            class="w-full px-4 py-3 border border-second-opacity-0 bg-second rounded-lg outline-0 focus:border-primary"
+                            placeholder="اختر موقع البداية">
+                        <span class="absolute left-3 top-3 text-gray-400">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </span>
+                    </div>
+                    <div *ngIf="orderForm.get('fromAddress')?.invalid && orderForm.get('fromAddress')?.touched"
+                        class="text-red-500 text-sm">
+                        يرجى إدخال عنوان البداية
+                    </div>
+                </div>
+
+                <!-- العنوان إلى -->
+                <div class="space-y-2" data-aos="fade-right">
+                    <label class="block text-gray-700 font-medium">العنوان إلى *</label>
+                    <div class="relative">
+                        <input type="text" formControlName="toAddress"
+                            class="w-full px-4 py-3 border border-second-opacity-0 bg-second rounded-lg outline-0 focus:border-primary"
+                            placeholder="اختر موقع الوصول">
+                        <span class="absolute left-3 top-3 text-gray-400">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </span>
+                    </div>
+                    <div *ngIf="orderForm.get('toAddress')?.invalid && orderForm.get('toAddress')?.touched"
+                        class="text-red-500 text-sm">
+                        يرجى إدخال عنوان الوصول
+                    </div>
+                </div>
+
+                <!-- عدد الغرف -->
+                <div class="space-y-2" data-aos="fade-left">
+                    <label class="block text-gray-700 font-medium">عدد الغرف *</label>
+                    <input type="number" formControlName="rooms" min="1"
+                        class="w-full px-4 py-3 border border-second-opacity-0 bg-second rounded-lg outline-0 focus:border-primary"
+                        placeholder="عدد الغرف">
+                    <div *ngIf="orderForm.get('rooms')?.invalid && orderForm.get('rooms')?.touched"
+                        class="text-red-500 text-sm">
+                        يرجى إدخال عدد غرف صحيح
+                    </div>
+                </div>
+
+                <!-- السعر التقريبي -->
+                <div class="space-y-2" data-aos="fade-right">
+                    <label class="block text-gray-700 font-medium">السعر التقريبي</label>
+                    <div class="w-full px-4 py-3 border border-second-opacity-0 bg-second rounded-lg font-bold text-lg">
+                        {{ calculatedPrice }} ريال
+                    </div>
+                </div>
+
+                <!-- نوع الشحن -->
+                <div class="space-y-2" data-aos="fade-left">
+                    <label class="block text-gray-700 font-medium">نوع الشحن</label>
+                    <select formControlName="shippingType"
+                        class="w-full px-4 py-3 border border-second-opacity-0 bg-second rounded-lg outline-0 focus:border-primary    ">
+                        <option *ngFor="let option of shippingOptions" [value]="option.id">{{ option.name }}</option>
+                    </select>
+                </div>
+
+                <!-- رفع صور الأغراض -->
+                <div class="space-y-2" data-aos="fade-right">
+                    <label class="block text-gray-700 font-medium">رفع صور الأغراض</label>
+                    <div class="flex items-center justify-center w-full">
+                        <label
+                            class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-second-opacity-0 rounded-lg cursor-pointer bg-second ">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <i class="fas fa-cloud-upload-alt text-primary text-3xl mb-2"></i>
+                                <p class="text-sm text-gray-500">انقر لرفع الصور أو اسحبها هنا</p>
+                            </div>
+                            <input type="file" class="hidden" multiple accept="image/*"
+                                (change)="onFileSelected($event)">
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- الأغراض المطلوب نقلها -->
+            <div class="space-y-2"  data-aos="zoom-in">
+                <label class="block text-gray-700 font-medium">الأغراض المطلوب نقلها</label>
+                <textarea formControlName="itemsDescription" rows="3"
+                    class="w-full px-4 py-3 border border-second-opacity-0 bg-second rounded-lg outline-0 focus:border-primary     "
+                    placeholder="وصف الأغراض التي تريد نقلها"></textarea>
+            </div>
+
+            <!-- تأكيد الطلب -->
+            <div class="pt-4"  data-aos="zoom-in">
+                <button type="submit"
+                    class="w-full bg-primary text-white py-3 px-4 rounded-lg font-medium  transition duration-300 opacity-75 hover:opacity-100">
+                    تأكيد الطلب
+                </button>
+            </div>
+        </form>
+
+</div>
+
+
+<div data-aos="zoom-in-up" class="fixed z-50  service-card top-[0%] left-[0%]  bg-opa w-full h-[100vh] flex justify-center items-center p-3 "
+    *ngIf="isOkey">
+    <div class="bg-white py-12 px-8 text-center w-fit shadow-xl rounded-xl flex flex-col gap-4 min-w-[300px]">
+        <!-- <p class="text-gray-600 bg-second p-2 rounded-full w-9 h-9 ml-auto">✗</p> -->
+        <div class="text-center "> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="80" height="80"
+                class="mx-auto">
+                <!-- دائرة -->
+                <circle cx="50" cy="50" r="40" stroke="#F6EAD6" stroke-width="6" fill="none" stroke-dasharray="251"
+                    stroke-dashoffset="251">
+                    <animate attributeName="stroke-dashoffset" from="251" to="0" dur="1s" fill="freeze" />
+                </circle>
+
+                <!-- علامة صح -->
+                <path d="M30 50 L45 65 L70 35" stroke="#DB6B1E" stroke-width="6" fill="none" stroke-dasharray="60"
+                    stroke-dashoffset="60">
+                    <animate attributeName="stroke-dashoffset" from="60" to="0" dur="0.6s" begin="1s" fill="freeze" />
+                </path>
+            </svg></div>
+
+
+        <p>يسعدنا اختيارك رحّال طلبك تم تأكيده بنجاح، وسنقوم بالتواصل معك قريبًا.</p>
+        <button
+            class=" border-second-opacity-0 border-3 w-fit px-5 py-2 rounded-xl mr-auto hover:bg-primary hover:text-second-opacity-0"
+            (click)="changeOkey()">اغلاق</button>
+    </div>
+
+</div>

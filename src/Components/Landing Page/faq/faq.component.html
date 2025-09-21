@@ -1,0 +1,36 @@
+<!-- <p>faq works!</p> -->
+
+
+<div class="max-w-screen-xl mx-auto px-4 py-12 w-full" data-aos="zoom-in-up"
+     dir="rtl">
+    <div class="text-center mb-10">
+        <h2 class="text-3xl sm:text-4xl font-bold text-primary mb-3">الأسئلة الشائعة</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">ابحث عن إجابات للأسئلة المتكررة حول خدماتنا وخصائصها</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div *ngFor="let item of FAQData; let i = index"
+        data-aos="fade-up"
+            class="border border-second-opacity-0 rounded-lg overflow-hidden transition-all duration-300 w-full h-fit"
+            [class.border-blue-500]="openedItemId === i">
+
+            <!-- Question -->
+            <button (click)="toggleItem(i)"
+                class="w-full p-4 text-right flex justify-between items-center bg-second hover:bg-second-opacity-0 transition-colors duration-200 pulse-effect">
+
+                <span class="text-lg font-medium text-gray-800">{{ item.question }}</span>
+
+                <!-- Toggle icon -->
+                <svg [class.rotate-180]="openedItemId === i"
+                    class="w-5 h-5 text-primary transition-transform duration-300" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
+
+            <!-- Answer with animation -->
+            <div *ngIf="openedItemId === i" class="p-4 bg-white text-gray-600 answer-inner animate-fade-in">
+                {{ item.answer }}
+            </div>
+        </div>
+    </div>
+</div>

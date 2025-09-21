@@ -1,17 +1,39 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-// import { HeaderComponent } from "../Components/Landing Page/header/header.component";
-// import { HeroComponent } from "../Components/Landing Page/hero/hero.component";
-// import { AboutComponent } from "../Components/Landing Page/about/about.component";
-// import { LandingPageComponent } from "../Pages/landing-page/landing-page.component";
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
+import { ViewportScroller } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import * as AOS from 'aos';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+
+export class AppComponent implements OnInit {
   title = 'Rahhal';
+
+  constructor(
+    private router: Router,
+    private viewportScroller: ViewportScroller
+  ) { }
+
+  ngOnInit() {
+    AOS.init({
+      once: false,
+      mirror: true,
+      startEvent: 'load'
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+      AOS.refresh();
+    });
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.viewportScroller.scrollToPosition([0, 0]);
+      }
+    });
+  }
 }
+

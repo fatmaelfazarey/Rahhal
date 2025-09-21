@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, OnDestroy, NgZone, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ServicesImage, ServicesVideo, assets } from '../../../assets/assets';
-
 @Component({
   selector: 'app-home-service',
   standalone: true,
@@ -12,11 +11,11 @@ import { ServicesImage, ServicesVideo, assets } from '../../../assets/assets';
 export class HomeServiceComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() serviceData: any;
   @ViewChild('backgroundVideo') videoElement!: ElementRef<HTMLVideoElement>;
-  
+
   assets = assets;
   ServicesImage = ServicesImage;
   ServicesVideo = ServicesVideo;
-  
+
   currentMediaUrl: string = '';
   currentIndex: number = 0;
   isVideo: boolean = false;
@@ -24,11 +23,11 @@ export class HomeServiceComponent implements OnInit, OnDestroy, AfterViewInit {
   private mediaArray: any[] = [];
   private usedIndices: Set<number> = new Set();
 
-  constructor(private ngZone: NgZone) {}
+  constructor(private ngZone: NgZone) { }
 
   ngOnInit() {
     this.prepareMediaArray();
-    
+
     if (this.mediaArray.length > 0) {
       this.setRandomMedia();
       this.startMediaRotation();
@@ -46,14 +45,14 @@ export class HomeServiceComponent implements OnInit, OnDestroy, AfterViewInit {
   // تجهيز مصفوفة الوسائط من الصور والفيديوهات
   prepareMediaArray() {
     this.mediaArray = [];
-    
+
     // إضافة الصور أولاً
     if (this.serviceData?.images?.length > 0) {
       this.serviceData.images.forEach((image: string) => {
         this.mediaArray.push({ type: 'image', url: image });
       });
     }
-    
+
     // إضافة الفيديوهات
     if (this.serviceData?.videos?.length > 0) {
       this.serviceData.videos.forEach((video: string) => {
@@ -68,10 +67,10 @@ export class HomeServiceComponent implements OnInit, OnDestroy, AfterViewInit {
       const video = this.videoElement.nativeElement;
       video.muted = true; // كتم الصوت
       video.loop = true; // تكرار الفيديو
-      
+
       // محاولة تشغيل الفيديو تلقائياً
       const playPromise = video.play();
-      
+
       if (playPromise !== undefined) {
         playPromise.catch(error => {
           console.log('تشغيل الفيديو التلقائي فشل، سيتم إعادة المحاولة:', error);
@@ -104,24 +103,24 @@ export class HomeServiceComponent implements OnInit, OnDestroy, AfterViewInit {
   // اختيار وسائط عشوائية مع ضمان عدم التكرار حتى تنتهي جميع الوسائط
   setRandomMedia() {
     if (this.mediaArray.length === 0) return;
-    
+
     // إذا تم عرض جميع الوسائط، ابدأ مجموعة جديدة
     if (this.usedIndices.size >= this.mediaArray.length) {
       this.usedIndices.clear();
     }
-    
+
     let randomIndex;
     do {
       randomIndex = Math.floor(Math.random() * this.mediaArray.length);
     } while (this.usedIndices.has(randomIndex));
-    
+
     this.usedIndices.add(randomIndex);
     this.currentIndex = randomIndex;
-    
+
     const media = this.mediaArray[this.currentIndex];
     this.currentMediaUrl = media.url;
     this.isVideo = media.type === 'video';
-    
+
     // إذا كان الفيديو، ننتظر حتى يتم تحميل العنصر في العرض
     if (this.isVideo) {
       setTimeout(() => {
@@ -147,16 +146,16 @@ export class HomeServiceComponent implements OnInit, OnDestroy, AfterViewInit {
       const media = this.mediaArray[this.currentIndex];
       this.currentMediaUrl = media.url;
       this.isVideo = media.type === 'video';
-      
+
       this.usedIndices.add(index);
-      
+
       // إذا كان الفيديو، ننتظر حتى يتم تحميل العنصر في العرض
       if (this.isVideo) {
         setTimeout(() => {
           this.setupVideoAutoplay();
         }, 100);
       }
-      
+
       this.restartRotation();
     }
   }

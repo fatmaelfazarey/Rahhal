@@ -1,0 +1,64 @@
+/* 
+
+
+<!-- محتوى مكون all-packages -->
+<div class="fade-in">
+    <!-- حالة عدم وجود باقات -->
+    <div *ngIf="filteredPackages.length === 0" class="text-center py-12">
+        <i class="fas fa-box-open text-4xl text-gray-300 mb-4"></i>
+        <p class="text-gray-500 text-lg">لا توجد باقات متاحة في هذا القسم حالياً</p>
+    </div>
+
+    <!-- عرض الباقات -->
+    <div *ngIf="filteredPackages.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div *ngFor="let pkg of filteredPackages" class="package-card bg-white rounded-xl overflow-hidden shadow-lg">
+            <div class="bg-gradient-to-r from-blue-600 to-blue-500 text-white p-6">
+                <h3 class="text-xl font-bold">{{ pkg.name }}</h3>
+                <div class="flex items-end mt-4">
+                    <span class="text-3xl font-bold">
+                        {{ pkg.price }} {{ isNumber(pkg.price) ? 'ريال' : '' }}
+                    </span>
+                </div>
+                <div class="mt-2 text-blue-100">{{ getCategoryName(pkg.category) }}</div>
+            </div>
+
+            <div class="p-6">
+                <h4 class="font-semibold text-gray-700 mb-4">المميزات المتضمنة:</h4>
+                <div class="space-y-3">
+                    <div *ngFor="let feature of getFeatureList(pkg.features)"
+                        class="feature-item flex items-center p-2 rounded-lg" [class.bg-green-50]="feature.value"
+                        [class.bg-gray-100]="!feature.value">
+                        <i [class]="feature.value ? 'fas fa-check-circle text-green-500' : 'fas fa-times-circle text-gray-400'"
+                            class="ml-3"></i>
+                        <span class="text-gray-700">{{ feature.name }}</span>
+                    </div>
+                </div>
+
+                <button
+                    class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition duration-300">
+                    اختر الباقة
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+*/
+
+
+
+/* .packages-table {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-collapse: collapse;
+    width: 100%;
+} */
+
+td,
+th {
+    /* border: 3px; */
+    /* border-color: var(--color-second); */
+    border: 1px solid var(--color-second-opacity-0);
+
+
+}

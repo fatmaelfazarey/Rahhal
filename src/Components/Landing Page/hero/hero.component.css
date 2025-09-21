@@ -4,7 +4,7 @@
 
 @keyframes boxes_move_right {
     from {
-        left: -100%;
+        left: -200PX;
     }
 
     to {
@@ -14,7 +14,7 @@
 
 @keyframes boxes_move_right_1280 {
     from {
-        left: -100%;
+        left: -200PX;
     }
 
     to {
@@ -24,7 +24,7 @@
 
 @keyframes boxes_move_right_1024 {
     from {
-        left: -100%;
+        left: -200PX;
     }
 
     to {
@@ -71,7 +71,7 @@
 
 @keyframes van_move_left {
     from {
-        right: -100%;
+        right: -200PX;
     }
 
     to {
@@ -81,7 +81,7 @@
 
 @keyframes van_move_left_1280 {
     from {
-        right: -100%;
+        right: -200PX;
     }
 
     to {
@@ -91,7 +91,7 @@
 
 @keyframes van_move_left_1024 {
     from {
-        right: -100%;
+        right: -200px;
     }
 
     to {

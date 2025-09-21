@@ -1,7 +1,7 @@
-<div class="max-w-screen-xl mx-auto px-4 w-full h-fit flex flex-col md:flex-row justify-between items-center mt-3 gap-4 md:gap-0"
+<div class="max-w-screen-xl mx-auto px-4 w-full h-fit flex flex-col md:flex-row justify-between items-center mt-3 gap-4 md:gap-0 "
     dir="rtl">
     <!-- Logo & Mobile Menu Button -->
-    <div class="flex items-center justify-between w-full md:w-auto">
+    <div class="flex items-center justify-between w-full md:w-auto" data-aos="fade-left">
         <a [routerLink]="'/'" class="w-[155px] flex-shrink-0" aria-label="Go to homepage">
             <img [src]="assets.logo" alt="Website logo" class="w-full h-auto" width="155" height="auto">
         </a>
@@ -28,7 +28,7 @@
     </div>
 
     <!-- Navigation - Desktop -->
-    <nav class="hidden md:block" aria-label="Main navigation">
+    <nav class="hidden md:block" data-aos="zoom-in-up" aria-label="Main navigation">
         <ul class="flex flex-col md:flex-row items-center w-full justify-center">
             <li *ngFor="let item of NavBar"
                 class="p-2 px-6 text-dark hover:text-primary hover:border-b-3 border-primary duration-300 ease-in-out transition-all text-center w-full md:w-auto hover:bg-second rounded-lg">
@@ -41,7 +41,7 @@
     </nav>
 
     <!-- Navigation - Mobile -->
-    <div class="fixed top-[61px] right-0 z-50 px-4 w-full h-full bg-white" *ngIf="isMenuOpen"
+    <div class="fixed top-[61px] right-0 z-50 px-4 w-full h-full bg-white" data-aos="fade-right"  *ngIf="isMenuOpen"
         (click)="handleBackdropClick($event)">
         <nav class="h-full w-full bg-white transform transition-transform duration-300 ease-in-out md:hidden" dir="rtl"
             aria-label="Mobile navigation">
@@ -58,7 +58,7 @@
     </div>
 
     <!-- Button - Desktop -->
-    <button aria-label="Inquiry" routerLink="/orders"
+    <button aria-label="Inquiry" data-aos="fade-right" routerLink="/orders"
         class="hidden md:block border-3 rounded-full border-primary w-[155px] p-2 bg-second text-dark hover:bg-primary hover:text-second duration-300 ease-in-out transition-colors flex-shrink-0">
         استعلام
     </button>

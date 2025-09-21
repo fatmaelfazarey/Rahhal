@@ -1,0 +1,55 @@
+<div class="fade-in w-full">
+    <!-- حالة عدم وجود باقات -->
+    <div *ngIf="filteredPackages.length === 0" class="text-center py-12">
+        <i class="fas fa-box-open text-4xl text-gray-300 mb-4"></i>
+        <p class="text-gray-500 text-lg">لا توجد باقات متاحة في هذا القسم حالياً</p>
+    </div>
+
+    <!-- عرض الباقات على شكل جدول أفقي -->
+    <div *ngIf="filteredPackages.length > 0"
+        class="table-container mt-6  rounded-3xl border-1 border-second-opacity-0 z-20  overflow-scroll relative scrollbar ">
+        <table class="w-full" data-aos="zoom-in-up">
+            <thead data-aos="zoom-in-up">
+                <tr class="p-4 " data-aos="zoom-in-up">
+                    <td class="p-4 boder-3 ">اسم الباقة / الميزة</td>
+                    <td *ngFor="let pkg of filteredPackages" class="text-sm md:text-base p-4 text-center ">
+                        {{ pkg.name }}
+                    </td>
+                </tr>
+            </thead>
+            <tbody data-aos="zoom-in-up">
+                <!-- سعر الباقة -->
+                <tr class=" p-4" data-aos="zoom-in-up">
+                    <td class="p-4">السعر</td>
+                    <td *ngFor="let pkg of filteredPackages" class="p-4 text-center">
+                        {{ pkg.price }} {{ isNumber(pkg.price) ? 'ريال' : '' }}
+                    </td>
+                </tr>
+
+
+                <!-- الميزات -->
+                <tr *ngFor="let feature of getAllFeatures()" class=" p-4" data-aos="zoom-in-up">
+                    <td class="p-4">{{ feature }}</td>
+                    <td *ngFor="let pkg of filteredPackages" class="feature-cell p-4 text-center">
+
+                        <p
+                            [class]="pkg.features[feature] ? 'text-primary bg-second p-2 rounded-full w-9 h-9 mx-auto' : 'text-gray-600 bg-gray-50 p-2 rounded-full w-9 h-9 mx-auto'">
+                            {{pkg.features[feature] ?
+                            '✓' : '✗'}}</p>
+                    </td>
+                </tr>
+
+                <!-- زر الإجراء -->
+                <tr class=" p-4" data-aos="zoom-in-up">
+                    <td class="p-4">اختر الباقة</td>
+                    <td *ngFor="let pkg of filteredPackages" class="py-4 px-4 text-center">
+                        <button routerLink="/orders"
+                            class="action-btn bg-second text-primary px-2.5 py-2.5  rounded-xl w-full hover:bg-primary hover:text-second duration-300 ease-in-out">
+                            اختر الباقة
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

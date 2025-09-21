@@ -1,6 +1,6 @@
 <div id="services" class="max-w-screen-xl mx-auto px-4 py-12 w-full">
     <!-- Section Title -->
-    <div class="text-center mb-8 md:mb-12">
+    <div class="text-center mb-8 md:mb-12" data-aos="zoom-in-up">
         <h2 class="text-2xl sm:text-3xl font-bold text-primary mb-2">خدماتنا</h2>
         <p class="text-gray-600 max-w-2xl mx-auto px-4 text-sm sm:text-base">نقدم لكم مجموعة متكاملة من الخدمات المتميزة
             التي تلبي جميع احتياجاتكم</p>
@@ -9,6 +9,7 @@
     <!-- Services Cards -->
     <div class="flex flex-row-reverse flex-wrap justify-center gap-4 md:gap-6  ">
         <div *ngFor="let service of services" [routerLink]="'/service/' + service.navigateTo"
+        data-aos="zoom-in-up"
             class="service-card w-full xs:w-[85%] sm:w-[48%] md:w-[45%] lg:w-[30%] xl:w-[30%] bg-white rounded-lg overflow-hidden shadow-md h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-b-4 border-transparent hover:border-primary group">
 
             <!-- Service Image -->

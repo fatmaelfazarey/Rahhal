@@ -1,0 +1,45 @@
+<div class="max-w-screen-xl mx-auto px-4 py-12 w-full" dir="rtl" id="packages">
+    <!-- Section Title -->
+    <div class="text-center mb-8 md:mb-12" data-aos="zoom-in-up">
+        <h2 class="text-2xl sm:text-3xl font-bold text-primary mb-2">باقات رحال</h2>
+        <p class="text-gray-600 mb-6">اختر الباقة المناسبة لاحتياجاتك واستمتع بخدمات الشحن والتوصيل المميزة</p>
+
+        <div class="flex  justify-center gap-2 md:gap-4 overflow-scroll  scrollbar ">
+            <a (click)="setCategory('all')"
+                class="category-btn px-4 py-2 rounded-full border border-second-opacity-0 text-sm md:text-base flex items-center cursor-pointer min-w-fit hover:bg-second duration-300 ease-in-out"
+                [class.active-category]="categoryId === 'all'">
+                <i class="fas fa-boxes ml-2 text-primary"></i> كل الباقات
+            </a>
+
+            <a (click)="setCategory('same-building')"
+                class="category-btn px-4 py-2 rounded-full border border-second-opacity-0 text-sm md:text-base flex items-center cursor-pointer min-w-fit hover:bg-second duration-300 ease-in-out"
+                [class.active-category]="categoryId === 'same-building'">
+                <i class="fas fa-building ml-2 text-primary"></i> داخل نفس المبنى
+            </a>
+
+            <a (click)="setCategory('same-city')"
+                class="category-btn px-4 py-2 rounded-full border border-second-opacity-0 text-sm md:text-base flex items-center cursor-pointer min-w-fit hover:bg-second duration-300 ease-in-out"
+                [class.active-category]="categoryId === 'same-city'">
+                <i class="fas fa-city ml-2 text-primary"></i> داخل نفس المدينة
+            </a>
+
+            <a (click)="setCategory('city-to-city')"
+                class="category-btn px-4 py-2 rounded-full border border-second-opacity-0 text-sm md:text-base flex items-center cursor-pointer min-w-fit hover:bg-second duration-300 ease-in-out"
+                [class.active-category]="categoryId === 'city-to-city'">
+                <i class="fas fa-route ml-2 text-primary"></i> مدينة إلى مدينة
+            </a>
+
+            <a (click)="setCategory('country-to-country')"
+                class="category-btn px-4 py-2 rounded-full border border-second-opacity-0 text-sm md:text-base flex items-center cursor-pointer min-w-fit hover:bg-second duration-300 ease-in-out"
+                [class.active-category]="categoryId === 'country-to-country'">
+                <i class="fas fa-globe-asia ml-2 text-primary"></i> دولة إلى دولة
+            </a>
+        </div>
+    </div>
+
+    <div class="mt-8">
+        <div class="mb-6">
+            <app-all-packages [category]="categoryId"></app-all-packages>
+        </div>
+    </div>
+</div>

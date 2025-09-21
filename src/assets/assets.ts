@@ -13,7 +13,8 @@ export const assets = {
     service_3: 'assets/images/service-3.png',
     service_4: 'assets/images/service-4.png',
     service_5: 'assets/images/service-5.png',
-    service_6: 'assets/images/service-6.png'
+    service_6: 'assets/images/service-6.png',
+    MobileMockup: 'assets/images/manMockup.png'
 };
 
 export const ServicesImage = {
@@ -64,15 +65,16 @@ export const ServicesImage = {
 export const ServicesVideo = {
     Video_01: 'assets/video/video-01.mp4',
     Video_02: 'assets/video/video-02.mp4',
-    Video_03: 'assets/video/video-06.mp4',
-    Video_04: 'assets/video/video-10.mp4',
-    Video_05: 'assets/video/video-02.mp4',
+    Video_03: 'assets/video/video-03.mp4',
+    Video_04: 'assets/video/video-04.mp4',
+    Video_05: 'assets/video/video-05.mp4',
     Video_06: 'assets/video/video-06.mp4',
-    Video_07: 'assets/video/video-11.mp4',
-    Video_08: 'assets/video/video-13.mp4',
-    Video_09: 'assets/video/video-02.mp4',
-    Video_10: 'assets/video/video-06.mp4',
+    Video_07: 'assets/video/video-07.mp4',
+    Video_08: 'assets/video/video-08.mp4',
+    Video_09: 'assets/video/video-09.mp4',
+    Video_10: 'assets/video/video-10.mp4',
     Video_11: 'assets/video/video-11.mp4',
     Video_12: 'assets/video/video-12.mp4',
     Video_13: 'assets/video/video-13.mp4',
+    lp: 'assets/video/lp.mp4',
 }

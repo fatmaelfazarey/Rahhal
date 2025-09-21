@@ -1,0 +1,67 @@
+.service-card {
+    backdrop-filter: blur(15px);
+    background-color: rgba(255, 255, 255, 0.627);
+}
+
+.contact-form {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Alert animation */
+.alert-animation {
+    animation: slideInDown 0.5s ease-out, fadeOut 0.5s ease-in 4.5s forwards;
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .contact-form {
+        position: relative !important;
+        top: 0 !important;
+        transform: none !important;
+        right: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        margin-top: 1rem;
+    }
+    
+    .h-\[600px\] {
+        height: 800px !important;
+    }
+}
+
+/* Focus styles for inputs */
+/* input:focus, textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+} */
+
+/* Button disabled state */
+/* button:disabled {
+    cursor: not-allowed;
+} */
+
+/* button:disabled:hover {
+    background-color: inherit;
+    color: inherit;
+} */

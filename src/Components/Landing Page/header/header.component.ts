@@ -4,6 +4,7 @@ import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { assets } from '../../../assets/assets';
 
+
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -17,8 +18,9 @@ export class HeaderComponent {
   NavBar = [
     { text: "الرئيسية", navigateTo: "/", fragment: undefined },
     { text: "من نحن", navigateTo: "/", fragment: "about" },
-    { text: "الخدمات", navigateTo: "/services", fragment: 'services' },
-    { text: "اتصل بنا", navigateTo: "/contact", fragment: undefined }
+    { text: "خدمات", navigateTo: "/", fragment: 'services' },
+    { text: "باقات", navigateTo: "/", fragment: 'packages' },
+    { text: "اتصل بنا", navigateTo: "/", fragment: 'contact' }
   ];
 
   constructor(

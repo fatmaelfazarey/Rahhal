@@ -1,0 +1,28 @@
+<div class="flex flex-col relative w-full mb-20 md:mb-16 px-4 bg-primary h-[400px] overflow-y-scroll scrollbar ">
+    <div class="absolute inset-0 bg-cover bg-center overflow-hidden w-full h-[600px]">
+        <div class="absolute inset-0">
+            <video #backgroundVideo class="w-full h-full object-cover" [src]="ServicesVideo.lp" muted loop playsinline
+                (error)="onVideoError()">
+                المتصفح الخاص بك لا يدعم تشغيل الفيديو.
+            </video>
+
+
+
+            <div class="absolute inset-0 b40"></div>
+
+            <!-- عناصر التحكم -->
+            <!-- <div class="video-controls absolute bottom-4 left-4 flex space-x-2 bg-black/50 rounded-full p-2">
+                <button (click)="togglePlayback()" class="text-white p-2 rounded-full hover:bg-white/20">
+                    <i class="fas" [class.fa-play]="videoRef.nativeElement.paused"
+                        [class.fa-pause]="!videoRef.nativeElement.paused"></i>
+                </button>
+                <button (click)="toggleMute()" class="text-white p-2 rounded-full hover:bg-white/20">
+                    <i class="fas" [class.fa-volume-mute]="videoRef.nativeElement.muted"
+                        [class.fa-volume-up]="!videoRef.nativeElement.muted"></i>
+                </button>
+            </div> -->
+        </div>
+    </div>
+
+
+</div>

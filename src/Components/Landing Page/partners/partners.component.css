@@ -1,0 +1,47 @@
+
+/* تدرج لوني للطبقة فوق الفيديو */
+.b40 {
+  background: linear-gradient(to bottom, 
+              rgba(0, 0, 0, 0.3), 
+              rgba(0, 0, 0, 0.7));
+}
+
+/* تأثيرات التحكم بالفيديو */
+.video-controls {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.video-container:hover .video-controls {
+  opacity: 1;
+}
+
+/* التأكد من أن الفيديو يغطي المساحة المطلوبة */
+video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* التكيف مع الأجهزة المختلفة */
+@media (max-width: 768px) {
+  .video-controls {
+    opacity: 1; /* إظهار عناصر التحكم دائماً على Mobile */
+  }
+}
+
+/* تأثيرات التحميل */
+.fallback-image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* تحسين المظهر للعناصر */
+button {
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}

@@ -23,7 +23,8 @@ export class ServicesContentService {
           'سرعة في التنفيذ مع الالتزام بالمواعيد.',
           'فريق مدرَّب على جميع أنواع الأثاث.'
         ],
-        images: [ServicesImage.Service_img_18, ServicesImage.Service_img_09, ServicesImage.Service_img_39, ServicesImage.Service_img_20, ServicesImage.Service_img_12, ServicesImage.Service_img_01],
+        images: [],
+        // images: [ServicesImage.Service_img_18, ServicesImage.Service_img_09, ServicesImage.Service_img_39, ServicesImage.Service_img_20, ServicesImage.Service_img_12, ServicesImage.Service_img_01],
         videos: [ServicesVideo.Video_01, ServicesVideo.Video_02]
 
       },
@@ -42,8 +43,9 @@ export class ServicesContentService {
           'خدمة سريعة وموثوقة.',
           'فريق مدرَّب بخبرة عملية طويلة.'
         ],
-        images: [ServicesImage.Service_img_05, ServicesImage.Service_img_13, ServicesImage.Service_img_25, ServicesImage.Service_img_07, ServicesImage.Service_img_29],
-        videos: [ServicesVideo.Video_03, ServicesVideo.Video_04]
+        images: [],
+        // images: [ServicesImage.Service_img_05, ServicesImage.Service_img_13, ServicesImage.Service_img_25, ServicesImage.Service_img_07, ServicesImage.Service_img_29],
+        videos: [ ServicesVideo.Video_01,ServicesVideo.Video_11,ServicesVideo.Video_12]
       },
 
       moving: {
@@ -60,8 +62,9 @@ export class ServicesContentService {
           'متابعة دقيقة لكل مرحلة من النقل.',
           'التزام تام بمواعيد التسليم.'
         ],
-        images: [ServicesImage.Service_img_02, ServicesImage.Service_img_16, ServicesImage.Service_img_31, ServicesImage.Service_img_19, ServicesImage.Service_img_08],
-        videos: [ServicesVideo.Video_06, ServicesVideo.Video_05]
+        images: [],
+        // images: [ServicesImage.Service_img_02, ServicesImage.Service_img_16, ServicesImage.Service_img_31, ServicesImage.Service_img_19, ServicesImage.Service_img_08],
+        videos: [ ServicesVideo.Video_09,ServicesVideo.Video_13]
       },
 
       packing: {
@@ -78,8 +81,9 @@ export class ServicesContentService {
           'أسعار مناسبة للجميع.',
           'فريق متخصص في التغليف الاحترافي.'
         ],
-        images: [ServicesImage.Service_img_11, ServicesImage.Service_img_27, ServicesImage.Service_img_04, ServicesImage.Service_img_36, ServicesImage.Service_img_22],
-        videos: [ServicesVideo.Video_07, ServicesVideo.Video_08]
+        images: [],
+        // images: [ServicesImage.Service_img_11, ServicesImage.Service_img_27, ServicesImage.Service_img_04, ServicesImage.Service_img_36, ServicesImage.Service_img_22],
+        videos: [ServicesVideo.Video_05,ServicesVideo.Video_10]
       },
 
       shipping: {
@@ -96,8 +100,9 @@ export class ServicesContentService {
           'ضمان وصول الطرود بأمان.',
           'شركاء شحن معتمدين وموثوقين.'
         ],
-        images: [ServicesImage.Service_img_03, ServicesImage.Service_img_15, ServicesImage.Service_img_26, ServicesImage.Service_img_34, ServicesImage.Service_img_21],
-        videos: [ServicesVideo.Video_09, ServicesVideo.Video_10]
+        images: [],
+        // images: [ServicesImage.Service_img_03, ServicesImage.Service_img_15, ServicesImage.Service_img_26, ServicesImage.Service_img_34, ServicesImage.Service_img_21],
+        videos: [ServicesVideo.Video_03,ServicesVideo.Video_04,ServicesVideo.Video_07,ServicesVideo.Video_08]
       },
 
       cleaning: {
@@ -116,7 +121,7 @@ export class ServicesContentService {
         ],
         images: [],
         // images: [ServicesImage.Service_img_06, ServicesImage.Service_img_10, ServicesImage.Service_img_28, ServicesImage.Service_img_33, ServicesImage.Service_img_40],
-        videos: [ServicesVideo.Video_11, ServicesVideo.Video_12]
+        videos: [ServicesVideo.Video_02,ServicesVideo.Video_06]
       }
 
 
